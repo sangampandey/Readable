@@ -1,21 +1,28 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import 'bulma/css/bulma.css'
+import "react-placeholder/lib/reactPlaceholder.css"
+import NotFound from "./pages/NotFound";
+import Post from "./pages/Posts";
+import PostNew from "./pages/PostNew";
+import PostEdit from "./pages/PostEdit";
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <BrowserRouter>
+                <div>
+                    <Switch>
+                        <Route path="/" exact component={Post}/>
+                        <Route path="/posts/new" exact component={PostNew}/>
+                        <Route path="/:category" exact component={Post}/>
+                        <Route path="/post/edit/:id" children={props => <PostEdit {...props}/>} />
+                        <Route path="*" component={NotFound}/>
+                    </Switch>
+                </div>
+            </BrowserRouter>
+        );
+    }
 }
 
 export default App;
