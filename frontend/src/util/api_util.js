@@ -19,5 +19,5 @@ export const fetchComments = (post_id) => axios.get(`${API_ENDPOINT}/posts/${pos
 export const createComment = (data) => axios.post(`${API_ENDPOINT}/comments`,data);
 export const fetchCommentByID = (comment_id) => axios.get(`${API_ENDPOINT}/comments/${comment_id}`);
 export const voteOnComment = (comment_id,option) => axios.post(`${API_ENDPOINT}/comments/${comment_id}`,option);
-export const updateComment = (comment_id,data) => axios.put(`${API_ENDPOINT}/comments/${comment_id}`,data);
+export const editComment = (comment_id,data) => axios.put(`${API_ENDPOINT}/comments/${comment_id}`,data);
 export const deleteComment = (comment_id) => axios.delete(`${API_ENDPOINT}/comments/${comment_id}`);

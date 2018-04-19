@@ -14,7 +14,7 @@ import {
     Title
 } from 'bloomer';
 import CategoriesList from '../components/CategoriesList';
-import PostItem from "./PostItem";
+import PostItem from "../components/PostItem";
 import {deletePost, fetchCategories, fetchCategoryPosts, fetchPosts, sortedPosts, voteForPost} from "../actions";
 import {connect} from "react-redux";
 import ReactPlaceholder from 'react-placeholder';
@@ -57,7 +57,9 @@ class Post extends Component {
 
         if (posts) {
             const orderedPosts = _.sortBy(posts, postsSorted).reverse();
-            return _.map(orderedPosts, post => <PostItem upvote={_upvote} downvote={_downvote} deletePost={_deleteButtonPress} key={post.id} data={post}/>);
+            return _.map(orderedPosts, post => <PostItem upvote={_upvote} downvote={_downvote}
+                                                         deletePost={_deleteButtonPress} key={post.id} data={post}
+                                                         showAction={true}/>);
         }
 
         return (
@@ -148,8 +150,6 @@ class Post extends Component {
 
 function mapStateToProps(state) {
 
-    console.log(state);
-
     if (state.hasOwnProperty("categories") && state.categories.hasOwnProperty("data") && state.categories.data.hasOwnProperty("categories")) {
         if (state.hasOwnProperty("posts") && state.posts.hasOwnProperty("data")) {
             const posts = _.filter(state.posts.data, post => !post.deleted);
@@ -159,7 +159,7 @@ function mapStateToProps(state) {
             return {categories: state.categories.data.categories, posts: null}
         }
     }
-    return {categories: null, post: null};
+    return {categories: null, posts: null};
 }
 
 export default connect(mapStateToProps, {

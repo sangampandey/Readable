@@ -13,16 +13,12 @@ import {
     Tag,
     Title
 } from 'bloomer';
+import {getDate} from "../util/helpers_util";
 
 class PostItem extends Component {
 
     render() {
-        const {data, deletePost, upvote, downvote} = this.props;
-
-        const _getDate = (timestamp) => {
-            let d = new Date(timestamp);
-            return d.toLocaleString();
-        };
+        const {data, deletePost, upvote, downvote, showAction} = this.props;
 
         return (
             <div style={{marginBottom: 10}}>
@@ -30,7 +26,7 @@ class PostItem extends Component {
                     <CardContent>
                         <Content>
                             <Title isSize={4} style={{margin: 0}}>{data.title}</Title>
-                            <small>Published {_getDate(data.timestamp)} by {data.author}</small>
+                            <small>Published {getDate(data.timestamp)} by {data.author}</small>
                             <br/>
                             <Heading>Score is {data.voteScore}</Heading>
                             <Tag isColor='light'>{data.category}</Tag>
@@ -39,13 +35,16 @@ class PostItem extends Component {
                             <Columns>
                                 <Column isSize={1}>
                                     <Heading>
-                                        <Icon isSize="small"
-                                              className="fa fa-comments"/>
+                                        <Link to={`/${data.category}/post/${data.id}/comments`}>
+                                            <Icon isSize="small"
+                                                  className="fa fa-comments"/>
+                                        </Link>
                                         {data.commentCount}
                                     </Heading>
                                 </Column>
 
-                                <Column isSize={1}>
+                                {
+                                    showAction && <Column isSize={1}>
                                     <Heading>
                                         <a onClick={() => {
                                             upvote(data.id)
@@ -54,25 +53,31 @@ class PostItem extends Component {
 
                                     </Heading>
                                 </Column>
+                                }
 
-                                <Column isSize={1}>
+                                {
+                                    showAction && <Column isSize={1}>
                                     <Heading>
                                         <a onClick={() => {
                                             downvote(data.id)
                                         }}><Icon isSize="small"
                                                  className="fa fa-thumbs-down"/></a>
                                     </Heading>
-                                </Column>
+                                    </Column>
+                                }
 
                             </Columns>
                         </Content>
                     </CardContent>
-                    <CardFooter>
-                        <CardFooterItem> <Link to={`/post/edit/${data.id}`}>EDIT</Link></CardFooterItem>
-                        <CardFooterItem><a onClick={() => {
-                            deletePost(data.id)
-                        }}>DELETE</a></CardFooterItem>
-                    </CardFooter>
+                    {
+                        showAction &&
+                        <CardFooter>
+                            <CardFooterItem> <Link to={`/post/edit/${data.id}`}>EDIT</Link></CardFooterItem>
+                            <CardFooterItem><a onClick={() => {
+                                deletePost(data.id)
+                            }}>DELETE</a></CardFooterItem>
+                        </CardFooter>
+                    }
                 </Card>
             </div>
         );

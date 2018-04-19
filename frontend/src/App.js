@@ -6,6 +6,7 @@ import NotFound from "./pages/NotFound";
 import Post from "./pages/Posts";
 import PostNew from "./pages/PostNew";
 import PostEdit from "./pages/PostEdit";
+import CommentsList from "./pages/CommentsList";
 
 class App extends Component {
     render() {
@@ -17,6 +18,7 @@ class App extends Component {
                         <Route path="/posts/new" exact component={PostNew}/>
                         <Route path="/:category" exact component={Post}/>
                         <Route path="/post/edit/:id" children={props => <PostEdit {...props}/>} />
+                        <Route path="/:category/post/:post/comments" exact component={CommentsList}/>
                         <Route path="*" component={NotFound}/>
                     </Switch>
                 </div>

@@ -2,14 +2,14 @@ import React, {Component} from 'react';
 import {Field, reduxForm} from 'redux-form';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {editPost, fetchPost} from '../actions';
+import {editPost, fetchPosts} from '../actions';
 import {Box, Button, Column, Columns, Container} from 'bloomer';
-import NotFound from './NotFound';
+import {getPostByID} from "../util/helpers_util";
 
 class PostEdit extends Component {
 
     componentWillMount() {
-        this.props.fetchPost(this.props.match.params.id);
+
     }
 
     componentDidMount() {
@@ -54,14 +54,9 @@ class PostEdit extends Component {
     render() {
         const {
             handleSubmit,
-            post,
-            match: {params: {category}},
         } = this.props;
 
         return (
-            (!post)
-                ? <NotFound />
-                :
             <Box>
                 <Container>
                     <h1 className="title">Edit Post</h1><br/>
@@ -97,9 +92,10 @@ class PostEdit extends Component {
     }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state,ownParams) {
     if (state.hasOwnProperty("posts") && state.posts.hasOwnProperty("data")) {
-        return {post: state.posts.data};
+        const post=getPostByID(state.posts.data,ownParams.match.params.id);
+        return {post: post};
     }
     return {post: null};
 }
@@ -108,6 +104,6 @@ export default reduxForm({
     form: 'EditPostForm'
 })(
     connect(mapStateToProps, {
-        editPost, fetchPost
+        editPost, fetchPosts
     })(PostEdit)
 );
