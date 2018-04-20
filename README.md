@@ -41,3 +41,9 @@ npm start
 ## API Server
 
 Information about the API server and how to use it can be found in its [README file](api-server/README.md).
+
+## License
+
+Readable is Copyright © 2017 Sangam Pandey. It is free
+source code, and may be redistributed under the terms specified in the
+[LICENSE](/LICENSE) file.

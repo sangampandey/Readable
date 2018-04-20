@@ -4,7 +4,7 @@ axios.defaults.headers.common['Authorization'] = AUTH_HEADERS;
 
 //Category
 export const fetchCategories = () => axios.get(`${API_ENDPOINT}/categories`);
-export const fetchCategoryPosts = (category) => axios.get(`${API_ENDPOINT}/${category}/posts`);
+export const fetchCategoryByPosts = (category) => axios.get(`${API_ENDPOINT}/${category}/posts`);
 
 //Post
 export const fetchPosts = () => axios.get(`${API_ENDPOINT}/posts`);

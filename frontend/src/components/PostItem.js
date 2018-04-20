@@ -35,7 +35,7 @@ class PostItem extends Component {
                             <Columns>
                                 <Column isSize={1}>
                                     <Heading>
-                                        <Link to={`/${data.category}/post/${data.id}/comments`}>
+                                        <Link to={`/${data.category}/${data.id}/comments`}>
                                             <Icon isSize="small"
                                                   className="fa fa-comments"/>
                                         </Link>
@@ -72,7 +72,7 @@ class PostItem extends Component {
                     {
                         showAction &&
                         <CardFooter>
-                            <CardFooterItem> <Link to={`/post/edit/${data.id}`}>EDIT</Link></CardFooterItem>
+                            <CardFooterItem> <Link to={`/${data.category}/${data.id}/edit`}>EDIT</Link></CardFooterItem>
                             <CardFooterItem><a onClick={() => {
                                 deletePost(data.id)
                             }}>DELETE</a></CardFooterItem>

@@ -6,7 +6,7 @@ import {
     FETCH_COMMENT,
     FETCH_COMMENTS,
     VOTE_FOR_COMMENT
-} from "../util/constants";
+} from "./types";
 
 export const receiveComments = comments => ({
     type: FETCH_COMMENTS,

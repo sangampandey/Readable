@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import {Field, reduxForm} from 'redux-form';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {createPost, fetchCategories} from '../actions';
+import * as actions from '../actions';
 import {capitalize} from "../util/helpers_util";
 import {Box, Button, Column, Columns, Container, Label} from 'bloomer';
 import uuidv1 from 'uuid/v1';
@@ -139,7 +139,5 @@ function mapStateToProps(state) {
 export default reduxForm({
     form: 'CreatePostForm'
 })(
-    connect(mapStateToProps, {
-        createPost, fetchCategories
-    })(PostsNew)
+    connect(mapStateToProps, actions)(PostsNew)
 );

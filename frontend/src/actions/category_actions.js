@@ -1,5 +1,5 @@
 import * as ReadbleAPIUtil from '../util/api_util';
-import {FETCH_CATEGORIES, FETCH_CATEGORY_POSTS} from "../util/constants";
+import {FETCH_CATEGORIES, FETCH_CATEGORY_POSTS} from "./types";
 
 export const receiveCategories = categories => ({
     type: FETCH_CATEGORIES,
@@ -19,6 +19,6 @@ export const receiveCategoryPost = post => ({
 
 export const fetchCategoryPosts = (category) => dispatch => (
     ReadbleAPIUtil
-        .fetchCategoryPosts(category)
+        .fetchCategoryByPosts(category)
         .then(posts => dispatch(receiveCategoryPost(posts)))
 );

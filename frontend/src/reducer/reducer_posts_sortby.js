@@ -1,4 +1,4 @@
-import {POST_SORT_ORDER} from "../util/constants";
+import {POST_SORT_ORDER} from "../actions/types";
 
 const INITIAL_STATE = 'voteScore';
 

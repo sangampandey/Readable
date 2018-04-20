@@ -7,7 +7,7 @@ import {
     FETCH_POST,
     FETCH_POSTS,
     VOTE_POST
-} from "../util/constants";
+} from "../actions/types";
 const INITIAL_STATE = {};
 
 export default function (state = INITIAL_STATE, action) {

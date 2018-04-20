@@ -7,7 +7,7 @@ import {
     FETCH_POSTS,
     POST_SORT_ORDER,
     VOTE_POST
-} from "../util/constants";
+} from "./types";
 
 
 export const receivePosts = posts => ({
