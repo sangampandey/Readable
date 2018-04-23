@@ -20,6 +20,13 @@ class PostItem extends Component {
     render() {
         const {data, deletePost, upvote, downvote, showAction} = this.props;
 
+        const _deletePost = (id) => {
+            console.log("_deletePost");
+            deletePost(id, () => {
+                console.log("callback");
+                this.props.history.push('/');
+            });
+        }
         return (
             <div style={{marginBottom: 10}}>
                 <Card>
@@ -35,7 +42,7 @@ class PostItem extends Component {
                             <Columns>
                                 <Column isSize={1}>
                                     <Heading>
-                                        <Link to={`/${data.category}/${data.id}/comments`}>
+                                        <Link to={`/${data.category}/${data.id}`}>
                                             <Icon isSize="small"
                                                   className="fa fa-comments"/>
                                         </Link>
@@ -74,7 +81,7 @@ class PostItem extends Component {
                         <CardFooter>
                             <CardFooterItem> <Link to={`/${data.category}/${data.id}/edit`}>EDIT</Link></CardFooterItem>
                             <CardFooterItem><a onClick={() => {
-                                deletePost(data.id)
+                                _deletePost(data.id)
                             }}>DELETE</a></CardFooterItem>
                         </CardFooter>
                     }

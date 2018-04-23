@@ -33,7 +33,6 @@ class Post extends Component {
         this.props.fetchPosts();
     }
 
-
     _renderPost() {
 
         const {posts, postsSorted, fetchPosts} = this.props;
@@ -143,13 +142,19 @@ class Post extends Component {
     }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state,ownParams) {
+
+    console.log(ownParams);
 
     if (state.hasOwnProperty("categories") && state.categories.hasOwnProperty("data") && state.categories.data.hasOwnProperty("categories")) {
         if (state.hasOwnProperty("posts") && state.posts.hasOwnProperty("data")) {
             const posts = _.filter(state.posts.data, post => !post.deleted);
             const {sortedPosts} = state;
-            return {categories: state.categories.data.categories, posts: posts, postsSorted: sortedPosts}
+            let _posts = posts;
+            if (ownParams.match.params.hasOwnProperty("category")) {
+                _posts = _.filter(posts,{category:(ownParams.match.params.category).toLowerCase()})
+            }
+            return {categories: state.categories.data.categories, posts: _posts, postsSorted: sortedPosts}
         } else {
             return {categories: state.categories.data.categories, posts: null}
         }

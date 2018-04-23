@@ -127,17 +127,35 @@ class CommentsList extends Component {
             });
         };
 
+        const _deleteButtonPress = (id) => {
+            this.props.deletePost(id, () => {
+                fetchPosts();
+            });
+        };
+
+        const _upvote = (id) => {
+            this.props.voteForPost(id, 'upVote', () => {
+                fetchPosts();
+            });
+        };
+
+        const _downvote = (id) => {
+            this.props.voteForPost(id, 'downVote', () => {
+                fetchPosts();
+            });
+        };
+
         return (
             <div>
                 {
-                    postData ? <Columns isCentered>
+                    (postData.hasOwnProperty("id")) ? <Columns isCentered>
                             <Column isSize='1/3'>
                                 <CategoriesList active={this.state.active} categories={categories} fetchPost={fetchPost}/>
                             </Column>
                             <Column isSize='2/3'>
                                 <div>
-                                    <PostItem upvote={false} downvote={false} deletePost={false} key={postData.id} data={postData}
-                                              showAction={false}/>
+                                    <PostItem upvote={_upvote} downvote={_downvote} deletePost={_deleteButtonPress} key={postData.id} data={postData}
+                                              showAction={true}/>
                                     <Title isSize={6} style={{margin: 0}}>Comments</Title><br/>
                                     {this._renderCommentsList()}
                                     <Title isSize={6} style={{margin: 0}}>Add Comments</Title><br/>
@@ -153,8 +171,6 @@ class CommentsList extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-
-    console.log(state);
 
     if (state.hasOwnProperty("posts") && state.posts.hasOwnProperty("data")) {
         const posts = _.filter(state.posts.data, post => !post.deleted);

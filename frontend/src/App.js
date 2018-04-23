@@ -18,7 +18,7 @@ class App extends Component {
                         <Route path="/posts/new" exact component={PostNew}/>
                         <Route path="/:category" exact component={Post}/>
                         <Route path="/:category/:id/edit" children={props => <PostEdit {...props}/>} />
-                        <Route path="/:category/:id/comments" exact component={CommentsList}/>
+                        <Route path="/:category/:id" exact component={CommentsList}/>
                         <Route path="*" component={NotFound}/>
                     </Switch>
                 </div>
